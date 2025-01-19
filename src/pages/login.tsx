@@ -1,23 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // For redirecting after login
+  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Logging in with:', { email, password });
-    // Add authentication logic here
+    console.log("Logging in with:", { email, password });
+
+    // Simple check to ensure email isn't empty
+    if (!email.trim()) {
+      alert("Please enter a valid email!");
+      return;
+    }
+
+    // Store user’s email in localStorage for "remember me" effect
+    localStorage.setItem("loggedInUser", email);
+
+    // When we have real auth logic, we will implement here
+
+    // Redirect to the dashboard
+    navigate("/dashboard");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <motion.div
+      className="min-h-screen bg-gray-100 p-4 flex items-center justify-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h1 className="text-3xl font-bold text-center text-teal-600 mb-6">Welcome Back!</h1>
+        <h1 className="text-3xl font-bold text-center text-teal-600 mb-6">
+          Welcome Back!
+        </h1>
         <form onSubmit={handleLogin} className="space-y-6">
           {/* Email Input */}
           <div>
-            <label htmlFor="email" className="block text-gray-700 font-semibold">Email</label>
+            <label htmlFor="email" className="block text-gray-700 font-semibold">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -27,9 +55,12 @@ function Login() {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
             />
           </div>
+
           {/* Password Input */}
           <div>
-            <label htmlFor="password" className="block text-gray-700 font-semibold">Password</label>
+            <label htmlFor="password" className="block text-gray-700 font-semibold">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -39,6 +70,7 @@ function Login() {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
             />
           </div>
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -47,13 +79,16 @@ function Login() {
             Log In
           </button>
         </form>
+
         {/* Links */}
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{' '}
-          <a href="/signup" className="text-teal-600 hover:underline">Sign up</a>
+          Don&apos;t have an account?{" "}
+          <a href="/signup" className="text-teal-600 hover:underline">
+            Sign up
+          </a>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
