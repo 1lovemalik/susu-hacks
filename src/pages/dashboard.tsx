@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useNotifications } from "../App";
 import { groupData } from "../data/placeholderData";
@@ -95,7 +95,7 @@ function Dashboard() {
 
   // CALENDAR AND TIMELINE FEATURE
   // Mock upcoming events: payouts, next contributions, and more
-  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([
+  const [calendarEvents] = useState<CalendarEvent[]>([
     {
       id: 1,
       title: "Payout for Family Savings",
