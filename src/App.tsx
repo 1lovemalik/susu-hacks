@@ -21,6 +21,7 @@ function App() {
             <Link to="/login" className="hover:text-teal-400 transition">Login</Link>
             <Link to="/signup" className="hover:text-teal-400 transition">Signup</Link>
             <Link to="/dashboard" className="hover:text-teal-400 transition">Dashboard</Link>
+            <Link to="/groupdetails" className="hover:text-teal-400 transition">GroupDetails</Link>
           </nav>
         </div>
 
